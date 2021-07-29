@@ -41,10 +41,14 @@ public class InputValidate {
     }
 
     public static boolean validatePhoneNumber(String s) {
-        Pattern p = Pattern.compile("^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[789]\\d{9}$");
+        Pattern p = Pattern.compile("(0/91)?[7-9][0-9]{9}");
 
         Matcher m = p.matcher(s);
-        return (m.find() && m.group().equals(s));
+        if (!(m.matches())) {
+            return false;
+        }
+
+        return true;
     }
     
     public static void validatePincode(KeyEvent evt,String pincode){
@@ -141,5 +145,30 @@ public class InputValidate {
         // matched the ReGex
         return m.matches();
     //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static boolean validateAccountNo(String str) {
+       
+       String regex =  "[0-9]{9,18}";
+ 
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+ 
+        // If the string is empty
+        // return false
+        if (str == null)
+        {
+            return false;
+        }
+ 
+        // Pattern class contains matcher()
+        // method to find the matching
+        // between the given string
+        // and the regular expression.
+        Matcher m = p.matcher(str);
+ 
+        // Return if the string
+        // matched the ReGex
+        return m.matches();
     }
 }
