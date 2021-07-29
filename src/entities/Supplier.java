@@ -18,6 +18,7 @@ public class Supplier {
     public Supplier(){
         super();
     }
+
     
     private String name,address,extra,gstNo;
     private Long accountNo;
@@ -81,8 +82,10 @@ public class Supplier {
         this.phoneNo = phoneNo;
     }
 
-    private void Super() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+    @Override
+    public String toString() {
+        return "Supplier{" + "name=" + name + ", address=" + address + ", extra=" + extra + ", gstNo=" + gstNo + ", accountNo=" + accountNo + ", phoneNo=" + phoneNo + '}';
     }
 
   

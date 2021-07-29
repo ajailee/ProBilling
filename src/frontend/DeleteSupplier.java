@@ -14,13 +14,13 @@ import utils.InputValidate;
  *
  * @author Ajai Lee
  */
-public class EditSupplier extends javax.swing.JFrame {
+public class DeleteSupplier extends javax.swing.JFrame {
 
-    static EditSupplier instance;
+    static DeleteSupplier instance;
 
     static void buildUI() {
         if (instance == null) {
-            instance = new EditSupplier();
+            instance = new DeleteSupplier();
         }
         instance.setVisible(true);
         instance.requestFocus();
@@ -29,7 +29,7 @@ public class EditSupplier extends javax.swing.JFrame {
     /**
      * Creates new form AddSupplier
      */
-    private EditSupplier() {
+    private DeleteSupplier() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -357,8 +357,8 @@ public class EditSupplier extends javax.swing.JFrame {
         String gstNo = txt_gstNo.getText();
         String address = txt_address.getText();
         String extra = txt_extra.getText();
-        backend.Supplier.addSupplier(name, phoneNumber, gstNo, accountNumber, address, extra);
-        JOptionPane.showMessageDialog(this, "Supplier Added Successfully");
+        backend.Supplier.deleteSupplier(phoneNumber);
+        JOptionPane.showMessageDialog(this, "Supplier Deleted Successfully");
         clear();
     }//GEN-LAST:event_cmd_saveMouseClicked
 
@@ -443,21 +443,23 @@ public class EditSupplier extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditSupplier().setVisible(true);
+                new DeleteSupplier().setVisible(true);
             }
         });
     }

@@ -30,4 +30,8 @@ public class Supplier {
     public static List<entities.Supplier> getAllSupplier() {
         return SupplierDAO.getAllSupplier();
     }
+
+    public static boolean deleteSupplier(String phoneNumber) {
+      return SupplierDAO.deleteSupplier(Long.valueOf(phoneNumber));
+    }
 }

@@ -267,6 +267,14 @@ public class DashBoard extends javax.swing.JFrame {
 
         jLabel13.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/search.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
         jLabel13.setText("View Supplier");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel13MousePressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -403,6 +411,16 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
         EditSupplier.buildUI();
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_jLabel13MousePressed
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+          ViewSupplier.buildUI();
+    }//GEN-LAST:event_jLabel13MouseClicked
 
     /**
      * @param args the command line arguments
