@@ -12,9 +12,12 @@
     <property name="format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</property>
-    
-<!--Class to be mapped with the database -->
-    <mapping class="entities.User"/>
-    <mapping class="entities.Supplier"/>
+    <property name="hibernate.connection.autocommit">true</property>
+    <!--Class to be mapped with the database -->
+    <mapping class="entities.User" file="" jar="" package="entities" resource=""/>
+    <mapping class="entities.Supplier" file="" jar="" package="entities" resource=""/>
+    <mapping class="entities.Product" package="entities"/>
+    <mapping class="entities.Category" package="entities"/>
+    <mapping class="entities.Brand" package="entities"/>
   </session-factory>
 </hibernate-configuration>

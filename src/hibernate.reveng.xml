@@ -46,4 +46,5 @@ Contributor(s):
   <table-filter match-catalog="mydb" match-name="user"/>
   <table-filter match-catalog="mydb" match-name="product"/>
   <table-filter match-catalog="mydb" match-name="student"/>
+
 </hibernate-reverse-engineering>
