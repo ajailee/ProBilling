@@ -357,7 +357,7 @@ public class DeleteSupplier extends javax.swing.JFrame {
         String gstNo = txt_gstNo.getText();
         String address = txt_address.getText();
         String extra = txt_extra.getText();
-        backend.Supplier.deleteSupplier(phoneNumber);
+        backend.SupplierBE.deleteSupplier(phoneNumber);
         JOptionPane.showMessageDialog(this, "Supplier Deleted Successfully");
         clear();
     }//GEN-LAST:event_cmd_saveMouseClicked

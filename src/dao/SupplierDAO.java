@@ -55,7 +55,7 @@ public class SupplierDAO {
     }
     
     @SuppressWarnings("deprecation")
-    public static List getAllSupplier() {
+    public static List<Supplier> getAllSupplier() {
         List<Supplier> list = null;
         
         try {

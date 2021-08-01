@@ -158,7 +158,7 @@ public class ViewSupplier extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setUpTable() {
-        List<entities.Supplier> list = backend.Supplier.getAllSupplier();
+        List<entities.Supplier> list = backend.SupplierBE.getAllSupplier();
         DefaultTableModel tb = (DefaultTableModel) jTable1.getModel();
         Object[] rowData = new Object[7];
         for (int i = 0; i < list.size() ; i++) {

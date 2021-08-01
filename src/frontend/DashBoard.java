@@ -5,10 +5,12 @@
  */
 package frontend;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -63,6 +65,11 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        inventoryPanel = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,6 +109,11 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getSize()+10f));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Inventory");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getSize()+10f));
@@ -420,6 +432,77 @@ public class DashBoard extends javax.swing.JFrame {
 
         jPanel3.add(productPanel, "card3");
 
+        inventoryPanel.setBackground(new java.awt.Color(0, 255, 204));
+        inventoryPanel.setLayout(new java.awt.GridBagLayout());
+
+        jLabel20.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/edit.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel20.setText("Edit Inventory");
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 114;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 186, 0, 0);
+        inventoryPanel.add(jLabel20, gridBagConstraints);
+
+        jLabel21.setBackground(new java.awt.Color(204, 255, 0));
+        jLabel21.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/add.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel21.setText("Add Inventory");
+        jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel21MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel21MouseEntered(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 113;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 70, 0, 0);
+        inventoryPanel.add(jLabel21, gridBagConstraints);
+
+        jLabel22.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/delete1.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel22.setText("Delete Inventory");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 107;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(164, 186, 0, 71);
+        inventoryPanel.add(jLabel22, gridBagConstraints);
+
+        jLabel23.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/view.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel23.setText("View Inventory");
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel23MousePressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 107;
+        gridBagConstraints.ipady = 128;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(100, 70, 50, 0);
+        inventoryPanel.add(jLabel23, gridBagConstraints);
+
+        jPanel3.add(inventoryPanel, "card3");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -447,6 +530,7 @@ public class DashBoard extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -504,7 +588,7 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
         // TODO add your handling code here:
-
+        changePanel(inventoryPanel);
     }//GEN-LAST:event_jLabel13MousePressed
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
@@ -541,6 +625,33 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel16MouseClicked
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        changePanel(inventoryPanel);
+
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
+        // TODO add your handling code here:
+        AddInventory.buildUI();
+    }//GEN-LAST:event_jLabel21MouseClicked
+
+    private void jLabel21MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel21MouseEntered
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel23MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -550,24 +661,35 @@ public class DashBoard extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.put("TabbedPane.showTabSeparators", true);
+            UIManager.put("Component.innerFocusWidth", 1);
+            UIManager.put("Component.arrowType", "triangle");
+            UIManager.put("Button.arc", 999);
+            UIManager.put("Component.arc", 999);
+            UIManager.put("ProgressBar.arc", 999);
+            UIManager.put("TextComponent.arc", 999);
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -577,6 +699,7 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel inventoryPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -589,6 +712,10 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

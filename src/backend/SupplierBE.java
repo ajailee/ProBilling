@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Ajai Lee
  */
-public class Supplier {
+public class SupplierBE {
    public static boolean addSupplier(String name,String phoneNo,String gstNo,String accountNo,String address,String extra){
        entities.Supplier s = new entities.Supplier(name,address,extra,gstNo,Long.valueOf(accountNo),Long.valueOf(phoneNo));
        return SupplierDAO.addSupplier(s);

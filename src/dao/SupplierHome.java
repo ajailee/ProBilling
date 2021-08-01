@@ -32,7 +32,7 @@ public class SupplierHome {
 
 	public void persist(Supplier transientInstance) {
 		logger.log(Level.INFO, "persisting Supplier instance");
-		try {
+		try {   
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
 		} catch (RuntimeException re) {

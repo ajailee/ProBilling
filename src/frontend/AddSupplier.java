@@ -358,7 +358,7 @@ public class AddSupplier extends javax.swing.JFrame {
         String gstNo = txt_gstNo.getText();
         String address = txt_address.getText();
         String extra = txt_extra.getText();
-        backend.Supplier.addSupplier(name, phoneNumber, gstNo, accountNumber, address, extra);
+        backend.SupplierBE.addSupplier(name, phoneNumber, gstNo, accountNumber, address, extra);
         JOptionPane.showMessageDialog(this, "Supplier Added Successfully");
         clear();
     }//GEN-LAST:event_cmd_saveMouseClicked
