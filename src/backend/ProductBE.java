@@ -6,6 +6,7 @@
 package backend;
 
 import dao.ProductHome;
+import entities.Product;
 import java.util.List;
 
 /**
@@ -15,5 +16,9 @@ import java.util.List;
 public class ProductBE {
     public static List<entities.Product> getAllProduct(){
         return ProductHome.getAll();
+    }
+
+    public static void add(Product p) {
+       new ProductHome().persist(p); //To change body of generated methods, choose Tools | Templates.
     }
 }

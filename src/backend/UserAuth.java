@@ -16,7 +16,7 @@ import utils.NewHibernateUtil;
  */
 public class UserAuth {
     
-    static User user;
+    public static User user;
     private static Transaction transaction;
     
   public static boolean login(String name,String password){
@@ -24,7 +24,7 @@ public class UserAuth {
             // start a transaction
              transaction = session.beginTransaction();
             // get an user object
-            user = (User) session.createQuery("FROM User U WHERE U.username = :userName").setParameter("userName", name)
+            user = (User) session.createQuery("FROM User U WHERE U.name = :userName").setParameter("userName", name)
                 .uniqueResult();
 
             if (user != null && user.getPassword().equals(password)) {
@@ -33,10 +33,11 @@ public class UserAuth {
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
+            System.out.println( e.getMessage());
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            
         }
         return false;
     } 

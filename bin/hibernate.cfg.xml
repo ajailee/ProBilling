@@ -14,10 +14,14 @@
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</property>
     <property name="hibernate.connection.autocommit">true</property>
     <!--Class to be mapped with the database -->
-    <mapping class="entities.User" file="" jar="" package="entities" resource=""/>
-    <mapping class="entities.Supplier" file="" jar="" package="entities" resource=""/>
+    <mapping class="entities.User" />
+    <mapping class="entities.Supplier" />
     <mapping class="entities.Product" package="entities"/>
     <mapping class="entities.Category" package="entities"/>
     <mapping class="entities.Brand" package="entities"/>
+    <mapping class="entities.Inventory" package="entities"/>
+    <mapping class="entities.Purchase" />
+    <mapping class="entities.Invoice"/>
+    <mapping class="entities.Sales"/>
   </session-factory>
 </hibernate-configuration>

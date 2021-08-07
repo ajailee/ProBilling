@@ -5,14 +5,18 @@
  */
 package frontend;
 
-import backend.BrandBE;
-import backend.CategoryBE;
+import backend.InventoryBE;
 import backend.ProductBE;
+import backend.PurchaseBE;
 import backend.SupplierBE;
-import entities.Category;
+import backend.UserAuth;
+import entities.Inventory;
 import entities.Product;
 import entities.Supplier;
 import java.awt.event.KeyEvent;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +29,8 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 public class AddInventory extends javax.swing.JFrame {
 
     static List<Product> productList = null;
+    static List<Inventory> inventoryList = new ArrayList<Inventory>();
+    static double total = 0;
 
     static AddInventory instance;
 
@@ -57,7 +63,7 @@ public class AddInventory extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_purchaseId = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -89,6 +95,8 @@ public class AddInventory extends javax.swing.JFrame {
         jLabel2.setText("Supplier");
 
         jLabel3.setText("Purchase Date");
+
+        jDateChooser1.setDateFormatString("d-MMM-y");
 
         jLabel4.setText("Product ID");
 
@@ -148,8 +156,18 @@ public class AddInventory extends javax.swing.JFrame {
         jLabel9.setText("Qty");
 
         jButton2.setText("CANCEL");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setText("SAVE");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setText("ADD");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,6 +180,8 @@ public class AddInventory extends javax.swing.JFrame {
 
         jLabel10.setText("GST %");
 
+        lab_total.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,7 +192,7 @@ public class AddInventory extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_purchaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_productId, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel1))
@@ -232,7 +252,7 @@ public class AddInventory extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_purchaseId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txt_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -309,19 +329,81 @@ public class AddInventory extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
-        if(selectedRow!=-1){
+        if (selectedRow != -1) {
             cmd_deleteOrReset.setText("Delete Row");
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void cmd_deleteOrResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_deleteOrResetMouseClicked
+    private void cmd_deleteOrResetMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        if(cmd_deleteOrReset.getText().equals("Delete Row")){
-            
-        }else{
+        if (cmd_deleteOrReset.getText().equals("Delete Row")) {
+
+            // TODO add your handling code here:
+//            logger.debug("cmd_DeletemouseClicked:::AddInventory2:::begin");
+//            logger.info("selected row in cmd_deleteMouseClicked::::AddInventory2" + jTable1.getSelectedRow());
+            DefaultTableModel tb = (DefaultTableModel) jTable1.getModel();
+            int row_count = jTable1.getSelectedRow();
+            double subTotal = (double) jTable1.getValueAt(row_count, 7);
+            total = total - subTotal;
+            lab_total.setText(String.valueOf((total)));
+            System.out.println(inventoryList.get(row_count));
+            inventoryList.remove(row_count);
+            System.out.println(inventoryList.toString());
+            tb.removeRow(row_count);
+            for (int index = row_count; index < tb.getRowCount(); index++) {
+                tb.setValueAt(index + 1, index, 0);
+            }
+            cmd_deleteOrReset.setText("Reset");
+        } else {
             reset();
+            //sample recording with obs 
         }
-    }//GEN-LAST:event_cmd_deleteOrResetMouseClicked
+    }
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        if (txt_purchaseId.getText().isBlank() || txt_supplier.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Please Check The Supplier and Purchase Id");
+            return;
+        } else if (jTable1.getRowCount() == -1 || inventoryList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cant Add An Empty List");
+            return;
+        }
+        try {
+            String purchaseId =txt_purchaseId.getText();
+            String supplierName =txt_supplier.getSelectedItem().toString();
+            Date date = jDateChooser1.getDate();
+            String addedBy = UserAuth.user.getId().toString();
+            Date addTime =  new Date();
+            boolean success = InventoryBE.add(inventoryList,purchaseId,supplierName,date,addedBy,addTime);
+            
+            if (success) {
+                clearTable();
+                JOptionPane.showMessageDialog(this, "Products Successfully Added");
+            } else {
+                JOptionPane.showMessageDialog(this, "Cant Add Products");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(null, "Sure? Do You want to Cancel?No Data will be saved", "Cancel",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            clearTable();
+            txt_supplier.setSelectedIndex(0);
+            txt_purchaseId.setText("");
+
+        } else if (result == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -377,12 +459,12 @@ public class AddInventory extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lab_total;
     private javax.swing.JTextField txt_gst;
     private javax.swing.JTextField txt_margin;
     private javax.swing.JComboBox<String> txt_product;
     private javax.swing.JTextField txt_productId;
+    private javax.swing.JTextField txt_purchaseId;
     private javax.swing.JTextField txt_purchaseprice;
     private javax.swing.JTextField txt_qty;
     private javax.swing.JTextField txt_saleprice;
@@ -427,54 +509,65 @@ public class AddInventory extends javax.swing.JFrame {
         return "No Product Found";
     }
 
+    private Product getProduct(String id) {
+        System.out.println("typed Index" + id);
+        for (Product p : productList) {
+            System.out.println(p.getId());
+            if (p.getId().equals(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     private void addToTable() {
         try {
             DefaultTableModel tb = (DefaultTableModel) jTable1.getModel();
 
-        if (txt_margin.getText().equals("")) {
-            //double p,double c,double d,int g
-            double p = Double.valueOf(txt_saleprice.getText());
-            double c = Double.valueOf(txt_purchaseprice.getText());
-            double d = 0;
-            int g = Integer.valueOf(txt_gst.getText());
-            double margin = calMargin(p, c, d, g);
-            txt_margin.setText(String.valueOf(margin));
+            if (txt_margin.getText().isBlank()) {
+                //double p,double c,double d,int g
+                double s = Double.valueOf(txt_saleprice.getText());
+                double p = Double.valueOf(txt_purchaseprice.getText());
 
-        } else {
-            //double c ,int m,int g,double d
+                double margin = calMargin(s, p);
+                txt_margin.setText(String.valueOf(margin));
 
-            double c = Double.valueOf(txt_purchaseprice.getText());
-            double d = 0;
-            double m = Double.valueOf(txt_margin.getText());
-            int g = Integer.valueOf(txt_gst.getText());
-            double price = calPrice(c, m, g, d);
-            txt_saleprice.setText(String.valueOf(price));
+            } else {
+                double c = Double.valueOf(txt_purchaseprice.getText());
+                double m = Double.valueOf(txt_margin.getText());
+                double price = calPrice(c, m);
+                txt_saleprice.setText(String.valueOf(price));
 
-        }
-        double subTotal =Double.valueOf(txt_purchaseprice.getText())*Double.valueOf(txt_qty.getText());
-        Object[] rowData = {jTable1.getRowCount() + 1, txt_productId.getText(), txt_product.getSelectedItem(), txt_purchaseprice.getText(), txt_saleprice.getText(), txt_margin.getText(), txt_qty.getText(), subTotal};
-        tb.addRow(rowData);
-        reset();
-            
+            }
+            double subTotal = Double.valueOf(txt_purchaseprice.getText()) * Double.valueOf(txt_qty.getText());
+            Object[] rowData = {jTable1.getRowCount() + 1, txt_productId.getText(), txt_product.getSelectedItem(), txt_purchaseprice.getText(), txt_saleprice.getText(), txt_margin.getText(), txt_qty.getText(), subTotal};
+            total = total + subTotal;
+            lab_total.setText(String.valueOf(total));
+            tb.addRow(rowData);
+
+            Inventory i = new Inventory(getProduct(txt_productId.getText()), Double.valueOf(txt_purchaseprice.getText()), Double.valueOf(txt_saleprice.getText()), Double.valueOf(txt_margin.getText()), Integer.valueOf(txt_qty.getText()));
+            inventoryList.add(i);
+            System.out.println(inventoryList.toString());
+
+            reset();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.toString());
         }
-        
 
     }
 
-    private double calPrice(double c, double m, double g, double d) {
-
-        double Price = c * (1 + (m / 100)) * (1 - (d / 100)) * (1 + (g / 100));
+    private double calPrice(double c, double m) {
+        double Price = c / (1 - m);
         String br = String.format("%.2f", Price);
         return Double.valueOf(br);
     }
 
-    private double calMargin(double p, double c, double d, int g) {
+    private double calMargin(double s, double p) {
         System.out.println("callled calMargin");
 
-        double Margin = (p * (100) * (100) * (100) - (100 * c) * (100 - d) * (100 + g) / (c * (100 - d) * (100 + g)));
-        String br = String.format("%.2f", Margin);
+        double Margin = (s - p) / (s * 100);
+        String br = String.format("%.2f", Margin * 100);
 
         return Double.valueOf(br);
     }
@@ -482,10 +575,12 @@ public class AddInventory extends javax.swing.JFrame {
     private void clearTable() {
         DefaultTableModel tb = (DefaultTableModel) jTable1.getModel();
         tb.setRowCount(0);
+        inventoryList.clear();
 
     }
 
     private void reset() {
+        //  Date x = jDateChooser1.getDate();
         txt_productId.setText("");
         txt_qty.setText("");
         txt_purchaseprice.setText("");

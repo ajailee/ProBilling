@@ -24,5 +24,9 @@
 	<classpathentry kind="lib" path="C:/Users/Ajai Lee/Downloads/hibernate/jboss-transaction-api_1.2_spec-1.1.1.Final.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ajai Lee/Downloads/hibernate/stax-ex-1.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ajai Lee/Downloads/hibernate/txw2-2.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ajai Lee/eclipse-workspace/test/src/resource/flatlaf-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ajai Lee/eclipse-workspace/test/src/resource/flatlaf-intellij-themes-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ajai Lee/eclipse-workspace/test/src/resource/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ajai Lee/eclipse-workspace/test/src/resource/swingx-all-1.6.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

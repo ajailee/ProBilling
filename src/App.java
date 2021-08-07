@@ -1,29 +1,23 @@
+
+import backend.InventoryBE;
+import backend.ProductBE;
 import dao.UserDAO;
 import entities.Brand;
 import entities.Category;
 import entities.Product;
-import entities.User;
+import entities.Purchase;
+import java.util.Date;
+import org.hibernate.SessionFactory;
 import utils.NewHibernateUtil;
 
 public class App {
 
-	public static void main(String[] args) {
-//		          Category c = new Category();
-//                          c.setCategory("Electronics");
-//                          Brand b = new Brand();
-//                          b.setBrand("M Star");
-//                          for(int i=0;i<200;i++){
-//                              Product p = new Product(i+4+"", "product"+i, "category"+i, "brand"+i, "qty", 5, 10, "123456");
-//                               NewHibernateUtil.getSession().beginTransaction();
-////                          NewHibernateUtil.getSession().save(c);
-////                          NewHibernateUtil.getSession().save(b);
-//                           NewHibernateUtil.getSession().save(p);
-//                          NewHibernateUtil.getSession().getTransaction().commit();
-             //             }
-                          
-                          
-                         
-                          
-	}
+    public static void main(String[] args) {
+        SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
+        Purchase p = new Purchase("123", "ajai", new Date(), new Product("id", "nam", "cat", "bran", "uno", 5, 10, "hsn"), 120, 130, 10, 30, "ajay", new Date());
+        sessionFactory.getCurrentSession().beginTransaction();
+        sessionFactory.getCurrentSession().persist(p);
+        sessionFactory.getCurrentSession().getTransaction().commit();
+    }
 
 }

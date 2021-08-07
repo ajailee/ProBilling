@@ -5,10 +5,11 @@
  */
 package entities;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -20,7 +21,8 @@ public class Inventory {
     @Id
     @GeneratedValue
     private Long inventoryId;
-    @OneToOne(targetEntity=Product.class,cascade=CascadeType.ALL)  
+    @OneToOne
+    @JoinColumn(name="productId")
     private Product product;
     private double buyingPrice;
     private double sellingPrice;
@@ -40,6 +42,10 @@ public class Inventory {
 
     public Product getProduct() {
         return product;
+    }
+
+    public Long getInventoryId() {
+        return inventoryId;
     }
 
     public void setProduct(Product product) {
@@ -76,6 +82,11 @@ public class Inventory {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory{" + "inventoryId=" + inventoryId + ", product=" + product.toString() + ", buyingPrice=" + buyingPrice + ", sellingPrice=" + sellingPrice + ", margine=" + margine + ", qty=" + qty + '}';
     }
     
     

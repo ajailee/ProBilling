@@ -38,7 +38,9 @@ public class ProductHome {
     public void persist(Product transientInstance) {
         logger.log(Level.INFO, "persisting Product instance");
         try {
+            sessionFactory.getCurrentSession().beginTransaction();
             sessionFactory.getCurrentSession().persist(transientInstance);
+            sessionFactory.getCurrentSession().getTransaction().commit();
             logger.log(Level.INFO, "persist successful");
         } catch (RuntimeException re) {
             logger.log(Level.SEVERE, "persist failed", re);
