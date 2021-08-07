@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ProductBE {
     public static List<entities.Product> getAllProduct(){
-        return ProductHome.getAll();
+        return new ProductHome().getAll();
     }
 
     public static void add(Product p) {

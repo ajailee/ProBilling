@@ -70,6 +70,11 @@ public class DashBoard extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        salesPanel = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -503,6 +508,77 @@ public class DashBoard extends javax.swing.JFrame {
 
         jPanel3.add(inventoryPanel, "card3");
 
+        salesPanel.setBackground(new java.awt.Color(0, 255, 204));
+        salesPanel.setLayout(new java.awt.GridBagLayout());
+
+        jLabel24.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/edit.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel24.setText("Edit Sales");
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel24MouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 114;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 186, 0, 0);
+        salesPanel.add(jLabel24, gridBagConstraints);
+
+        jLabel25.setBackground(new java.awt.Color(204, 255, 0));
+        jLabel25.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/add.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel25.setText("Sales");
+        jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel25MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel25MouseEntered(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 113;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 70, 0, 0);
+        salesPanel.add(jLabel25, gridBagConstraints);
+
+        jLabel26.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/delete1.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel26.setText("Delete Inventory");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 107;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(164, 186, 0, 71);
+        salesPanel.add(jLabel26, gridBagConstraints);
+
+        jLabel27.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/resource/view.png")).getImage().getScaledInstance(100,100, Image.SCALE_DEFAULT)));
+        jLabel27.setText("View Sales");
+        jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel27MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel27MousePressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 107;
+        gridBagConstraints.ipady = 128;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(100, 70, 50, 0);
+        salesPanel.add(jLabel27, gridBagConstraints);
+
+        jPanel3.add(salesPanel, "card3");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -548,6 +624,7 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
+        changePanel(salesPanel);
 
     }//GEN-LAST:event_jLabel3MouseClicked
 
@@ -652,6 +729,27 @@ public class DashBoard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel23MousePressed
 
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel24MouseClicked
+
+    private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
+        // TODO add your handling code here:
+        SalesPage.buildUI();
+    }//GEN-LAST:event_jLabel25MouseClicked
+
+    private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel25MouseEntered
+
+    private void jLabel27MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel27MouseClicked
+
+    private void jLabel27MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel27MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel27MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -716,6 +814,10 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -734,6 +836,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JPanel productPanel;
+    private javax.swing.JPanel salesPanel;
     // End of variables declaration//GEN-END:variables
 
     private void changePanel(JPanel panel) {

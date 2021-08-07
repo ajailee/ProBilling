@@ -1,6 +1,7 @@
-package entities;
+package dao;
 // Generated Aug 7, 2021, 2:12:16 PM by Hibernate Tools 5.4.30.Final
 
+import entities.Purchase;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,13 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Invoice.
- * @see entities.Invoice
+ * Home object for domain model class Purchase.
+ * @see entities.Purchase
  * @author Hibernate Tools
  */
-public class InvoiceHome {
+public class PurchaseHome {
 
-	private static final Logger logger = Logger.getLogger(InvoiceHome.class.getName());
+	private static final Logger logger = Logger.getLogger(PurchaseHome.class.getName());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -29,8 +30,8 @@ public class InvoiceHome {
 		}
 	}
 
-	public void persist(Invoice transientInstance) {
-		logger.log(Level.INFO, "persisting Invoice instance");
+	public void persist(Purchase transientInstance) {
+		logger.log(Level.INFO, "persisting Purchase instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
@@ -40,8 +41,8 @@ public class InvoiceHome {
 		}
 	}
 
-	public void attachDirty(Invoice instance) {
-		logger.log(Level.INFO, "attaching dirty Invoice instance");
+	public void attachDirty(Purchase instance) {
+		logger.log(Level.INFO, "attaching dirty Purchase instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			logger.log(Level.INFO, "attach successful");
@@ -51,8 +52,8 @@ public class InvoiceHome {
 		}
 	}
 
-	public void attachClean(Invoice instance) {
-		logger.log(Level.INFO, "attaching clean Invoice instance");
+	public void attachClean(Purchase instance) {
+		logger.log(Level.INFO, "attaching clean Purchase instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			logger.log(Level.INFO, "attach successful");
@@ -62,8 +63,8 @@ public class InvoiceHome {
 		}
 	}
 
-	public void delete(Invoice persistentInstance) {
-		logger.log(Level.INFO, "deleting Invoice instance");
+	public void delete(Purchase persistentInstance) {
+		logger.log(Level.INFO, "deleting Purchase instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			logger.log(Level.INFO, "delete successful");
@@ -73,10 +74,10 @@ public class InvoiceHome {
 		}
 	}
 
-	public Invoice merge(Invoice detachedInstance) {
-		logger.log(Level.INFO, "merging Invoice instance");
+	public Purchase merge(Purchase detachedInstance) {
+		logger.log(Level.INFO, "merging Purchase instance");
 		try {
-			Invoice result = (Invoice) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Purchase result = (Purchase) sessionFactory.getCurrentSession().merge(detachedInstance);
 			logger.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -85,10 +86,10 @@ public class InvoiceHome {
 		}
 	}
 
-	public Invoice findById(java.lang.Long id) {
-		logger.log(Level.INFO, "getting Invoice instance with id: " + id);
+	public Purchase findById(java.lang.Integer id) {
+		logger.log(Level.INFO, "getting Purchase instance with id: " + id);
 		try {
-			Invoice instance = (Invoice) sessionFactory.getCurrentSession().get("entities.Invoice", id);
+			Purchase instance = (Purchase) sessionFactory.getCurrentSession().get("entities.Purchase", id);
 			if (instance == null) {
 				logger.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -101,10 +102,10 @@ public class InvoiceHome {
 		}
 	}
 
-	public List findByExample(Invoice instance) {
-		logger.log(Level.INFO, "finding Invoice instance by example");
+	public List findByExample(Purchase instance) {
+		logger.log(Level.INFO, "finding Purchase instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("entities.Invoice")
+			List results = sessionFactory.getCurrentSession().createCriteria("entities.Purchase")
 					.add(Example.create(instance)).list();
 			logger.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;

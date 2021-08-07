@@ -168,7 +168,7 @@ public class InventoryHome {
     }
 
     public boolean saveOrUpdateProduct(List<Inventory> transientInstanceList, String purchaseId, String supplierName, Date date, String addedBy, Date addTime) {
-        logger.log(Level.INFO, "persisting Inventory instance");
+        logger.log(Level.INFO, "Add Stock To The Inventory");
         entities.Inventory i;
         try {
 
@@ -189,8 +189,8 @@ public class InventoryHome {
                     sessionFactory.getCurrentSession().persist(transientInstance);
                     sessionFactory.getCurrentSession().getTransaction().commit();
                 }
-                PurchaseBE.addPurchase(purchaseId, supplierName, date, transientInstance.getProduct(), transientInstance.getBuyingPrice(), transientInstance.getSellingPrice(), transientInstance.getMargine()  , transientInstance.getQty(), addedBy, addTime);
-                logger.log(Level.INFO, "persist successful");
+                PurchaseBE.addPurchase(purchaseId, supplierName, date, transientInstance.getProduct(), transientInstance.getBuyingPrice(), transientInstance.getSellingPrice(), transientInstance.getMargine(), transientInstance.getQty(), addedBy, addTime);
+                logger.log(Level.INFO, "Values Updated SuccessFully");
                 System.out.println(transientInstance.getInventoryId());
                 // return transientInstance.getInventoryId();
             }
@@ -202,5 +202,22 @@ public class InventoryHome {
 
         }
         return true;
+    }
+
+    public void reduceStock(String id, int qty) {
+        logger.log(Level.INFO, "Add Stock To The Inventory");
+        entities.Inventory i;
+        try {
+            i = findByProductId(id);
+            if (i != null) {
+                i.setQty(i.getQty() - qty);
+                sessionFactory.getCurrentSession().beginTransaction();
+                sessionFactory.getCurrentSession().update(i);
+                sessionFactory.getCurrentSession().getTransaction().commit();
+            }
+        } catch (Exception e) {
+        }
+        logger.log(Level.INFO, "Values Updated SuccessFully");
+
     }
 }

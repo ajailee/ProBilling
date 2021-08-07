@@ -3,6 +3,7 @@ package utils;
 
  
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 
@@ -30,6 +31,20 @@ public class NewHibernateUtil
    }
    public static org.hibernate.Session getSession() {
 	  return getSessionFactory().getCurrentSession();
+   }
+   
+   public static Transaction begainTransaction(){
+       Transaction tx = sessionFactory.getCurrentSession().getTransaction();
+       if(tx.isActive()){
+           return tx;
+       }else{
+           tx.begin();
+       }
+       return tx;
+   }
+   
+   public static void endTransaction(Transaction tx){
+       tx.commit();
    }
  
    public static void shutdown() {

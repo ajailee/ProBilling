@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,19 +25,23 @@ public class Invoice {
     @Column(unique = true, nullable = false, updatable = false)
     private Long invoiceId;
     private String customerNumber;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "invoiceId")
     private List<Sales> sales; 
+    private double total;
+    private String paymentMethod;
 
     public Invoice() {
     }
     
     
 
-    public Invoice(Long invoiceId, String customerNumber, List<Sales> sales) {
+    public Invoice(Long invoiceId, String customerNumber, List<Sales> sales,double total,String paymentMethod) {
         this.invoiceId = invoiceId;
         this.customerNumber = customerNumber;
         this.sales = sales;
+        this.total = total;
+        this.paymentMethod = paymentMethod;
     }
 
     public Long getInvoiceId() {
@@ -61,6 +66,11 @@ public class Invoice {
 
     public void setSales(List<Sales> sales) {
         this.sales = sales;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" + "invoiceId=" + invoiceId + ", customerNumber=" + customerNumber + ", sales=" + sales + '}';
     }
     
     

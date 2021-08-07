@@ -1,56 +1,60 @@
 package dao;
-// Generated Jul 30, 2021, 10:24:44 PM by Hibernate Tools 5.4.30.Final
+// Generated Aug 7, 2021, 2:12:16 PM by Hibernate Tools 5.4.30.Final
 
+import entities.Invoice;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Example;
-
-import entities.Product;
-import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import utils.NewHibernateUtil;
 
 /**
- * Home object for domain model class Product.
+ * Home object for domain model class Invoice.
  *
- * @see dao.Product
+ * @see entities.Invoice
  * @author Hibernate Tools
  */
-public class ProductHome {
+public class InvoiceHome {
 
-    private static final Logger logger = Logger.getLogger(ProductHome.class.getName());
+    private static final Logger logger = Logger.getLogger(InvoiceHome.class.getName());
 
     private final SessionFactory sessionFactory = getSessionFactory();
 
     protected SessionFactory getSessionFactory() {
         try {
             return NewHibernateUtil.getSessionFactory();
-            } catch (Exception e) {
+        } catch (Exception e) {
             logger.log(Level.SEVERE, "Could not locate SessionFactory in JNDI", e);
             throw new IllegalStateException("Could not locate SessionFactory in JNDI");
         }
     }
 
-    public void persist(Product transientInstance) {
-        logger.log(Level.INFO, "persisting Product instance");
+    public boolean persist(Invoice transientInstance) {
+        logger.log(Level.INFO, "persisting Invoice instance");
         try {
-            sessionFactory.getCurrentSession().beginTransaction();
+            Transaction tx = sessionFactory.getCurrentSession().getTransaction();
+            if (!tx.isActive()) {
+                tx.begin();
+            }
             sessionFactory.getCurrentSession().persist(transientInstance);
-            sessionFactory.getCurrentSession().getTransaction().commit();
+            tx.commit();
+
             logger.log(Level.INFO, "persist successful");
+            return true;
         } catch (RuntimeException re) {
             logger.log(Level.SEVERE, "persist failed", re);
-            throw re;
+            return false;
         }
     }
 
-    public void attachDirty(Product instance) {
-        logger.log(Level.INFO, "attaching dirty Product instance");
+    public void attachDirty(Invoice instance) {
+        logger.log(Level.INFO, "attaching dirty Invoice instance");
         try {
             sessionFactory.getCurrentSession().saveOrUpdate(instance);
             logger.log(Level.INFO, "attach successful");
@@ -60,8 +64,8 @@ public class ProductHome {
         }
     }
 
-    public void attachClean(Product instance) {
-        logger.log(Level.INFO, "attaching clean Product instance");
+    public void attachClean(Invoice instance) {
+        logger.log(Level.INFO, "attaching clean Invoice instance");
         try {
             sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
             logger.log(Level.INFO, "attach successful");
@@ -71,8 +75,8 @@ public class ProductHome {
         }
     }
 
-    public void delete(Product persistentInstance) {
-        logger.log(Level.INFO, "deleting Product instance");
+    public void delete(Invoice persistentInstance) {
+        logger.log(Level.INFO, "deleting Invoice instance");
         try {
             sessionFactory.getCurrentSession().delete(persistentInstance);
             logger.log(Level.INFO, "delete successful");
@@ -82,10 +86,10 @@ public class ProductHome {
         }
     }
 
-    public Product merge(Product detachedInstance) {
-        logger.log(Level.INFO, "merging Product instance");
+    public Invoice merge(Invoice detachedInstance) {
+        logger.log(Level.INFO, "merging Invoice instance");
         try {
-            Product result = (Product) sessionFactory.getCurrentSession().merge(detachedInstance);
+            Invoice result = (Invoice) sessionFactory.getCurrentSession().merge(detachedInstance);
             logger.log(Level.INFO, "merge successful");
             return result;
         } catch (RuntimeException re) {
@@ -94,15 +98,17 @@ public class ProductHome {
         }
     }
 
-    public Product findById(java.lang.String id) {
-        logger.log(Level.INFO, "getting Product instance with id: " + id);
+    public Invoice findById(java.lang.Long id) {
+        logger.log(Level.INFO, "getting Invoice instance with id: " + id);
         try {
-            Product instance = (Product) sessionFactory.getCurrentSession().get("dao.Product", id);
+            Transaction tx = NewHibernateUtil.begainTransaction();
+            Invoice instance = (Invoice) sessionFactory.getCurrentSession().get("entities.Invoice", id);
             if (instance == null) {
                 logger.log(Level.INFO, "get successful, no instance found");
             } else {
                 logger.log(Level.INFO, "get successful, instance found");
             }
+            NewHibernateUtil.endTransaction(tx);
             return instance;
         } catch (RuntimeException re) {
             logger.log(Level.SEVERE, "get failed", re);
@@ -110,12 +116,14 @@ public class ProductHome {
         }
     }
 
-    public List findByExample(Product instance) {
-        logger.log(Level.INFO, "finding Product instance by example");
+    public List findByExample(Invoice instance) {
+        logger.log(Level.INFO, "finding Invoice instance by example");
         try {
-            List results = sessionFactory.getCurrentSession().createCriteria("dao.Product")
+            Transaction tx = NewHibernateUtil.begainTransaction();
+            List results = sessionFactory.getCurrentSession().createCriteria("entities.Invoice")
                     .add(Example.create(instance)).list();
             logger.log(Level.INFO, "find by example successful, result size: " + results.size());
+            NewHibernateUtil.endTransaction(tx);
             return results;
         } catch (RuntimeException re) {
             logger.log(Level.SEVERE, "find by example failed", re);
@@ -123,25 +131,20 @@ public class ProductHome {
         }
     }
 
-    public List<Product> getAll() {
-
-        List<Product> list = null;
-
+    public Long getInvoiceId() {
+        logger.log(Level.INFO, "getting Invoice Number");
         try {
-            logger.log(Level.INFO, "finding all");
-            Transaction tx =sessionFactory.getCurrentSession().getTransaction();
-            if(!tx.isActive()){
-                tx.begin();
+            Transaction tx = NewHibernateUtil.begainTransaction();
+            Query result = sessionFactory.getCurrentSession().createQuery("Select MAX(invoiceId) from entities.Invoice");
+            Long id = (Long) result.uniqueResult();
+            if (id == null) {
+                return Long.valueOf("000001");
             }
-            list = NewHibernateUtil.getSession().createCriteria(entities.Product.class).list();
-            NewHibernateUtil.getSession().getTransaction().commit();
-            logger.log(Level.INFO, "find by all successful, result size: " + list.size());
-
-        } catch (HibernateException re) {
-            NewHibernateUtil.getSession().getTransaction().rollback();
-            logger.log(Level.SEVERE, "find all failed", re);
+            NewHibernateUtil.endTransaction(tx);
+            return id + 1L;
+        } catch (RuntimeException re) {
+            logger.log(Level.SEVERE, "find by example failed", re);
             throw re;
         }
-        return list;
     }
 }

@@ -1,6 +1,7 @@
-package entities;
+package dao;
 // Generated Aug 7, 2021, 2:12:16 PM by Hibernate Tools 5.4.30.Final
 
+import entities.Sales;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,13 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Purchase.
- * @see entities.Purchase
+ * Home object for domain model class Sales.
+ * @see entities.Sales
  * @author Hibernate Tools
  */
-public class PurchaseHome {
+public class SalesHome {
 
-	private static final Logger logger = Logger.getLogger(PurchaseHome.class.getName());
+	private static final Logger logger = Logger.getLogger(SalesHome.class.getName());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -29,8 +30,8 @@ public class PurchaseHome {
 		}
 	}
 
-	public void persist(Purchase transientInstance) {
-		logger.log(Level.INFO, "persisting Purchase instance");
+	public void persist(Sales transientInstance) {
+		logger.log(Level.INFO, "persisting Sales instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			logger.log(Level.INFO, "persist successful");
@@ -40,8 +41,8 @@ public class PurchaseHome {
 		}
 	}
 
-	public void attachDirty(Purchase instance) {
-		logger.log(Level.INFO, "attaching dirty Purchase instance");
+	public void attachDirty(Sales instance) {
+		logger.log(Level.INFO, "attaching dirty Sales instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			logger.log(Level.INFO, "attach successful");
@@ -51,8 +52,8 @@ public class PurchaseHome {
 		}
 	}
 
-	public void attachClean(Purchase instance) {
-		logger.log(Level.INFO, "attaching clean Purchase instance");
+	public void attachClean(Sales instance) {
+		logger.log(Level.INFO, "attaching clean Sales instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			logger.log(Level.INFO, "attach successful");
@@ -62,8 +63,8 @@ public class PurchaseHome {
 		}
 	}
 
-	public void delete(Purchase persistentInstance) {
-		logger.log(Level.INFO, "deleting Purchase instance");
+	public void delete(Sales persistentInstance) {
+		logger.log(Level.INFO, "deleting Sales instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			logger.log(Level.INFO, "delete successful");
@@ -73,10 +74,10 @@ public class PurchaseHome {
 		}
 	}
 
-	public Purchase merge(Purchase detachedInstance) {
-		logger.log(Level.INFO, "merging Purchase instance");
+	public Sales merge(Sales detachedInstance) {
+		logger.log(Level.INFO, "merging Sales instance");
 		try {
-			Purchase result = (Purchase) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Sales result = (Sales) sessionFactory.getCurrentSession().merge(detachedInstance);
 			logger.log(Level.INFO, "merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -85,10 +86,10 @@ public class PurchaseHome {
 		}
 	}
 
-	public Purchase findById(java.lang.Integer id) {
-		logger.log(Level.INFO, "getting Purchase instance with id: " + id);
+	public Sales findById(java.lang.Long id) {
+		logger.log(Level.INFO, "getting Sales instance with id: " + id);
 		try {
-			Purchase instance = (Purchase) sessionFactory.getCurrentSession().get("entities.Purchase", id);
+			Sales instance = (Sales) sessionFactory.getCurrentSession().get("entities.Sales", id);
 			if (instance == null) {
 				logger.log(Level.INFO, "get successful, no instance found");
 			} else {
@@ -101,10 +102,10 @@ public class PurchaseHome {
 		}
 	}
 
-	public List findByExample(Purchase instance) {
-		logger.log(Level.INFO, "finding Purchase instance by example");
+	public List findByExample(Sales instance) {
+		logger.log(Level.INFO, "finding Sales instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession().createCriteria("entities.Purchase")
+			List results = sessionFactory.getCurrentSession().createCriteria("entities.Sales")
 					.add(Example.create(instance)).list();
 			logger.log(Level.INFO, "find by example successful, result size: " + results.size());
 			return results;
